@@ -29,3 +29,7 @@ path = "src/hello-world.rs"
 [[bin]]
 name = "variables-and-mutability"
 path = "src/variables-and-mutability.rs"
+
+[[bin]]
+name = "if-and-loops"
+path = "src/if-and-loops.rs"
