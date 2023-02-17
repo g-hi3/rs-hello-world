@@ -33,3 +33,7 @@ path = "src/variables-and-mutability.rs"
 [[bin]]
 name = "if-and-loops"
 path = "src/if-and-loops.rs"
+
+[[bin]]
+name = "ownership"
+path = "src/ownership.rs"
