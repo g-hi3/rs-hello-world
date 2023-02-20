@@ -37,3 +37,7 @@ path = "src/if-and-loops.rs"
 [[bin]]
 name = "ownership"
 path = "src/ownership.rs"
+
+[[bin]]
+name = "references-and-borrowing"
+path = "src/references-and-borrowing.rs"
