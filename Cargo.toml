@@ -45,3 +45,7 @@ path = "src/references-and-borrowing.rs"
 [[bin]]
 name = "slice-type"
 path = "src/slice-type.rs"
+
+[[bin]]
+name = "defining-and-instantiating-structs"
+path = "src/defining-and-instantiating-structs.rs"
