@@ -49,3 +49,7 @@ path = "src/slice-type.rs"
 [[bin]]
 name = "defining-and-instantiating-structs"
 path = "src/defining-and-instantiating-structs.rs"
+
+[[bin]]
+name = "program-using-structs"
+path = "src/program-using-structs.rs"
