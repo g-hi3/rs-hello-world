@@ -53,3 +53,7 @@ path = "src/defining-and-instantiating-structs.rs"
 [[bin]]
 name = "program-using-structs"
 path = "src/program-using-structs.rs"
+
+[[bin]]
+name = "method-syntax"
+path = "src/method-syntax.rs"
