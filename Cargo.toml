@@ -65,3 +65,7 @@ path = "src/enum.rs"
 [[bin]]
 name = "match"
 path = "src/match.rs"
+
+[[bin]]
+name = "if-let"
+path = "src/if-let.rs"
