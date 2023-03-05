@@ -57,3 +57,7 @@ path = "src/program-using-structs.rs"
 [[bin]]
 name = "method-syntax"
 path = "src/method-syntax.rs"
+
+[[bin]]
+name = "enum"
+path = "src/enum.rs"
