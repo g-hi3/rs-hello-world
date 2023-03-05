@@ -39,8 +39,7 @@ fn main() {
     println!(
         "The area of the rectangle is {} square pixels.",
         // This is called the method syntax (calling the method using the dot operator).
-        // From what I can tell, you can also call this method by using Rectangle::area(&rect1).
-        // TODO: Check this in a non-web editor.
+        // A method can also be called by using Rectangle::area(&rect1).
         // Rust uses automatic dereferencing.
         // This means that there is no -> operator as in C++, because Rust automatically dereferences the value.
         rect1.area());
