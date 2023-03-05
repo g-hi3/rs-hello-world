@@ -61,3 +61,7 @@ path = "src/method-syntax.rs"
 [[bin]]
 name = "enum"
 path = "src/enum.rs"
+
+[[bin]]
+name = "match"
+path = "src/match.rs"
