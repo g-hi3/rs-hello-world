@@ -69,3 +69,11 @@ path = "src/match.rs"
 [[bin]]
 name = "if-let"
 path = "src/if-let.rs"
+
+[[bin]]
+name = "backyard"
+path = "src/backyard/main.rs"
+
+[[lib]]
+name = "restaurant"
+path = "src/restaurant/lib.rs"
