@@ -74,6 +74,6 @@ path = "src/if-let.rs"
 name = "backyard"
 path = "src/backyard/main.rs"
 
-[[lib]]
+[lib]
 name = "restaurant"
 path = "src/restaurant/lib.rs"

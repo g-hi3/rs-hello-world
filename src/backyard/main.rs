@@ -1,5 +1,5 @@
 // The use keyword is comparable to using in C# or import in Java.
-// crate seems to be a keyword for the base of the crate.
+// crate is a literal for the base of the current crate.
 // Separated by the :: Operator are sub-/modules and the type to "import".
 use crate::garden::vegetables::Asparagus;
 
