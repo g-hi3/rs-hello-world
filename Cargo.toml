@@ -77,3 +77,7 @@ path = "src/backyard/main.rs"
 [lib]
 name = "restaurant"
 path = "src/restaurant/lib.rs"
+
+[[bin]]
+name = "vector"
+path = "src/vector.rs"
