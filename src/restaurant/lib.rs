@@ -1,16 +1,8 @@
-mod front_of_house {
-    // This module needs to be public, because it will be accessed by a parent module.
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-        fn seat_at_table() {}
-    }
-
-    mod serving {
-        fn take_order() {}
-        fn serve_order() {}
-        fn take_payment() {}
-    }
-}
+// A mod statement imports a module.
+// A module only needs to be included once in the module tree.
+// use does not import.
+// Instead it creates an alias for less verbose access to module components.
+mod front_of_house;
 
 pub fn eat_at_restaurant() {
     // Absolute path
