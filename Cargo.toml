@@ -81,3 +81,7 @@ path = "src/restaurant/lib.rs"
 [[bin]]
 name = "vector"
 path = "src/vector.rs"
+
+[[bin]]
+name = "string"
+path = "src/string.rs"
