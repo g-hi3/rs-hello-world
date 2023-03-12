@@ -89,3 +89,7 @@ path = "src/string.rs"
 [[bin]]
 name = "hash-map"
 path = "src/hash-map.rs"
+
+[[bin]]
+name = "error-handling"
+path = "src/error-handling.rs"
