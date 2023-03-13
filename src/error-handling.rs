@@ -55,6 +55,16 @@ fn main() -> Result<(), Box<dyn Error>> {
         // expect calls the panic! macro when there is an error and pass the string to it.
         .expect("hello.txt should be included in this project");
 
+    // In such a situation, the developer has more information than the compiler.
+    let home: IpAddr = "127.0.0.1"
+        .parse()
+        .expect("Hardcoded IP address should be valid");
+
+    // It is advisable to panic, when the program is in an invalid state or has contradictory values.
+    // When a user passes bad data, it is more useful to return an error with information about how the data is wrong.
+    // Expected failure should also be wrapped inside a Result, such as I/O errors.
+    // When a contract is broken, the code needs to panic, because the error is caused by the calling code.
+
     Ok(())
 }
 
@@ -69,4 +79,26 @@ fn read_username_from_file() -> Result<String, io::Error> {
     Ok(username)
 
     // Actually, this whole function could be replaced by fs::read_to_string("hello.txt").
+}
+
+pub struct Guess {
+    // Because this value is private, only functions in the impl block may change it.
+    value: i32
+}
+
+impl Guess {
+    pub fn new(value: i32) -> {
+        // This guard clause makes sure the input value may only be between 1 and 100.
+        if value < 1 || value > 100 {
+            panic!("Guess value must be between 1 and 100, got {value}.");
+        }
+
+        Guess { value }
+    }
+
+    // This impl block only has a getter, so the value can never change.
+    // And because the input is only ever 1 to 100, it can never be outside of that range.
+    pub fn value(&self) -> i32 {
+        self.value
+    }
 }
