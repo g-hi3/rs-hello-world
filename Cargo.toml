@@ -93,3 +93,11 @@ path = "src/hash-map.rs"
 [[bin]]
 name = "error-handling"
 path = "src/error-handling.rs"
+
+[[bin]]
+name = "removing-duplication"
+path = "src/removing-duplication.rs"
+
+[[bin]]
+name = "generic-data-types"
+path = "src/generic-data-types.rs"
