@@ -101,3 +101,7 @@ path = "src/removing-duplication.rs"
 [[bin]]
 name = "generic-data-types"
 path = "src/generic-data-types.rs"
+
+[[bin]]
+name = "aggregator"
+path = "src/aggregator/lib.rs"
