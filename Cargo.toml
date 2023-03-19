@@ -105,3 +105,7 @@ path = "src/generic-data-types.rs"
 [[bin]]
 name = "aggregator"
 path = "src/aggregator/lib.rs"
+
+[[bin]]
+name = "lifetimes"
+path = "src/lifetimes.rs"
