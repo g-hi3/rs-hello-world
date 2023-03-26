@@ -109,3 +109,7 @@ path = "src/aggregator/lib.rs"
 [[bin]]
 name = "lifetimes"
 path = "src/lifetimes.rs"
+
+[lib]
+name = "adder"
+path = "src/adder/lib.rs"
