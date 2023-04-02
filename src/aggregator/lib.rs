@@ -66,6 +66,8 @@ fn main() {
 // For example, we can implement Display on a custom type or have Vec<T> implement our Summary trait.
 // It is not possible to implement an external trait for an external type (e.g. Display for Vec<T>).
 // This is called coherence, or more specifically the orphan rule.
+// Implementing a custom trait on an external type is comparable to extension methods in C#.
+// Impl blocks do not have access to private members of another crate.
 
 // Traits may be used as parameters like this.
 // This tells the compiler that the function may be used with any type that implements Summary.

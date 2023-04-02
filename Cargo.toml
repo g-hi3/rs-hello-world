@@ -107,5 +107,14 @@ name = "aggregator"
 path = "src/aggregator/lib.rs"
 
 [[bin]]
+<<<<<<< HEAD
 name = "minigrep"
 path = "src/minigrep/main.rs"
+=======
+name = "lifetimes"
+path = "src/lifetimes.rs"
+
+[lib]
+name = "adder"
+path = "src/adder/lib.rs"
+>>>>>>> 1254a612e34b1374f1eeafa8b78bb4f23d37ede7
