@@ -104,17 +104,16 @@ path = "src/generic-data-types.rs"
 
 [[bin]]
 name = "aggregator"
-path = "src/aggregator/lib.rs"
+path = "src/aggregator/main.rs"
 
 [[bin]]
-<<<<<<< HEAD
 name = "minigrep"
 path = "src/minigrep/main.rs"
-=======
+
+[[bin]]
 name = "lifetimes"
 path = "src/lifetimes.rs"
 
-[lib]
+[[bin]]
 name = "adder"
-path = "src/adder/lib.rs"
->>>>>>> 1254a612e34b1374f1eeafa8b78bb4f23d37ede7
+path = "src/adder/main.rs"

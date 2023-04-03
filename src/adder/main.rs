@@ -38,3 +38,6 @@ mod tests {
         assert!(larger.can_hold(&smaller));
     }
 }
+
+fn main() {
+}

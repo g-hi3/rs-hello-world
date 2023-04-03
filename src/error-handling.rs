@@ -18,7 +18,8 @@
 
 use std::error::Error;
 use std::fs::File;
-use std::io::ErrorKind;
+use std::io::{ErrorKind, Read};
+use std::net::IpAddr;
 
 // The main function can also return a Result<(), E>, to support the ? operator.
 // This means the return expression should be an appropriate error or Ok(()).
@@ -68,7 +69,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn read_username_from_file() -> Result<String, io::Error> {
+fn read_username_from_file() -> Result<String, Box<dyn Error>> {
     let mut username = String::new();
     // The ? operator at the end of the statement can be used to propagate errors.
     // This operator can only be used when the return type is Result with the appropriate error type.
@@ -87,7 +88,7 @@ pub struct Guess {
 }
 
 impl Guess {
-    pub fn new(value: i32) -> {
+    pub fn new(value: i32) -> Guess {
         // This guard clause makes sure the input value may only be between 1 and 100.
         if value < 1 || value > 100 {
             panic!("Guess value must be between 1 and 100, got {value}.");

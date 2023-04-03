@@ -25,7 +25,7 @@ fn main() {
         // Because b is only valid until the end of this scope, result is also valid until then.
         // This is because the lifetime expressed by 'a is the smaller of both arguments (in this case b).
         // This means that result would not be valid if used outside of this scope (e.g. when result was declared before the scope).
-        let result = longest(a.to_str(), b.to_str());
+        let result = longest(a.as_str(), b.as_str());
         println!("The longest is {result}");
     }
 

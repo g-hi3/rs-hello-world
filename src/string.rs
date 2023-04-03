@@ -22,7 +22,8 @@ fn main() {
     let hello = String::from("Hola");
 
     // Strings can be concatenated using the + operator or using the format macro.
-    let s = "hello" + format(", {}", 15);
+    // It's a bit more difficult with string slices, but "hello".to_string() + " world" works.
+    let s = format!("hello, {}", 15);
     // The + operator uses the add method.
 
     let s1 = String::from("Hello, ");
