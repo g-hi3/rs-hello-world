@@ -13,14 +13,14 @@ fn main() {
         // The Rust book calls the argument a closure (or anonymous function).
         // At this point, I'm not sure if I could pass a function.
         .unwrap_or_else(|err| {
-            println!("Unable to parse config: {err}");
+            eprintln!("Unable to parse config: {err}");
             process::exit(1);
         });
 
     println!("Searching for {} in file {}", config.query, config.file_path);
 
     if let Err(e) = minigrep::run(config) {
-        println!("Application error: {e}");
+        eprintln!("Application error: {e}");
         process::exit(1);
     }
 }
