@@ -1,4 +1,6 @@
-use std::{env, fs};
+use minigrep::Config;
+use std::{env, process};
+use std::error::Error;
 
 fn main() {
     // This is basically the equivalent of `string[] args` in C# and `String[] args` in Java.
@@ -7,13 +9,18 @@ fn main() {
     // The `collect()` function acts similar to `ToList()` in C# and evaluates the iterator.
     let args: Vec<String> = env::args().collect();
 
-    let query = &args[1];
-    let file_path = &args[2];
+    let config = Config::build(&args)
+        // The Rust book calls the argument a closure (or anonymous function).
+        // At this point, I'm not sure if I could pass a function.
+        .unwrap_or_else(|err| {
+            println!("Unable to parse config: {err}");
+            process::exit(1);
+        });
 
-    println!("Searching for {query} in file {file_path}");
+    println!("Searching for {} in file {}", config.query, config.file_path);
 
-    let contents = fs::read_to_string(file_path)
-        .expect("Should have been able to read the file");
-
-    println!("With text:\n{contents}");
+    if let Err(e) = minigrep::run(config) {
+        println!("Application error: {e}");
+        process::exit(1);
+    }
 }
