@@ -125,3 +125,7 @@ path = "src/closures.rs"
 [[bin]]
 name = "iterators"
 path = "src/iterators.rs"
+
+[[bin]]
+name = "iterator-performance"
+path = "src/iterator-performance.rs"
