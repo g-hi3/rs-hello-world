@@ -117,3 +117,7 @@ path = "src/lifetimes.rs"
 [[bin]]
 name = "adder"
 path = "src/adder/main.rs"
+
+[[bin]]
+name = "closures"
+path = "src/closures.rs"
