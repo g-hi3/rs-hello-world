@@ -40,7 +40,7 @@ fn main() {
 
     let user_pref1 = Some(ShirtColor::Red);
     let giveaway1 = store.giveaway(user_pref1);
-    println!("The user with preference {user_pref1:?} gets {giveaway2:?}");
+    println!("The user with preference {user_pref1:?} gets {giveaway1:?}");
 
     let user_pref2 = None;
     let giveaway2 = store.giveaway(user_pref2);
@@ -50,7 +50,7 @@ fn main() {
     // At this point, it's unclear how lifetimes come to play with closures.
     let expensive_closure = |num: u32| -> u32 {
         println!("calculating slowly...");
-        thread::sleep(Duration::from_secs(2));
+        thread::sleep(std::time::Duration::from_secs(2));
         num
     };
 

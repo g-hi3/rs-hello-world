@@ -1,6 +1,7 @@
-use minigrep::Config;
+use lib::Config;
 use std::{env, process};
-use std::error::Error;
+
+mod lib;
 
 fn main() {
     // This is basically the equivalent of `string[] args` in C# and `String[] args` in Java.
@@ -19,7 +20,7 @@ fn main() {
 
     println!("Searching for {} in file {}", config.query, config.file_path);
 
-    if let Err(e) = minigrep::run(config) {
+    if let Err(e) = lib::run(config) {
         eprintln!("Application error: {e}");
         process::exit(1);
     }
