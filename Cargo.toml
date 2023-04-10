@@ -10,6 +10,12 @@ edition = "2021"
 # It includes any version that is at least 0.8.5, but below 0.9.0.
 rand = "0.8.5"
 
+# Cargo has two main profiles: dev and release.
+# It uses dev by default and release when you provide the --release option.
+# Custom profiles can be added by using a [profile.*] section.
+# The opt-level for dev is 0 and 3 for release.
+# It tells the compiler how much optimization should be applied.
+
 [[bin]]
 name = "data-types"
 path = "src/data-types.rs"
