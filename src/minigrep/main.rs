@@ -8,9 +8,9 @@ fn main() {
     // The Rust book mentions `args_os()` and the `OsString` type here, but doesn't explain in detail.
     // From what I understand, `args()` returns an iterator, which is comparable to IEnumerable in C#.
     // The `collect()` function acts similar to `ToList()` in C# and evaluates the iterator.
-    let args: Vec<String> = env::args().collect();
+    // let args: Vec<String> = env::args().collect();
 
-    let config = Config::build(&args)
+    let config = Config::build(env::args())
         // The Rust book calls the argument a closure (or anonymous function).
         // At this point, I'm not sure if I could pass a function.
         .unwrap_or_else(|err| {
