@@ -40,6 +40,15 @@ members = [
     "add_one"
 ]
 
+# You can use `cargo install` to install binary Rust crates.
+# This is intended for developer tools.
+# The crates will be installed to the installation root's bin folder.
+
+# Cargo can be extended with custom functionality.
+# If there is a binary in the PATH environment variable that is named like cargo-something, it can be called just like a Cargo command:
+#     cargo something
+# This is very convenient for binaries that are installed by `cargo install`.
+
 [[bin]]
 name = "data-types"
 path = "src/data-types.rs"
