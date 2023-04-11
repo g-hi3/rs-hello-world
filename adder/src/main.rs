@@ -21,7 +21,7 @@ mod tests {
 
     #[test]
     fn another() {
-        panic!("This mskrd the test fail!");
+        panic!("This makes the test fail!");
     }
 
     #[test]
@@ -39,5 +39,9 @@ mod tests {
     }
 }
 
+use add_one;
+
 fn main() {
+    let num = 10;
+    println!("Hello, world! {num} plus one is {}!", add_one::add_one(num));
 }

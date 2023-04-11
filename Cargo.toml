@@ -29,6 +29,17 @@ rand = "0.8.5"
 # The opt-level for dev is 0 and 3 for release.
 # It tells the compiler how much optimization should be applied.
 
+# A workspace is somewhat similar to modules in Maven.
+# Each workspace has their own toml file.
+# The target directory for workspaces is the same as the root toml, but folders will be created for each workspace.
+# Crates in workspaces must be published separately.
+# To target a specific workspace with cargo build, test, etc, you can use the `-p <workspace>` option.
+[workspace]
+members = [
+    "adder",
+    "add_one"
+]
+
 [[bin]]
 name = "data-types"
 path = "src/data-types.rs"
@@ -126,16 +137,12 @@ name = "aggregator"
 path = "src/aggregator/main.rs"
 
 [[bin]]
-name = "minigrep"
-path = "src/minigrep/main.rs"
-
-[[bin]]
 name = "lifetimes"
 path = "src/lifetimes.rs"
 
 [[bin]]
 name = "adder"
-path = "src/adder/main.rs"
+path = "adder/src/main.rs"
 
 [[bin]]
 name = "closures"
