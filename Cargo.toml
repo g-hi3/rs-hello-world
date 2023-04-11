@@ -1,7 +1,20 @@
 [package]
+# Crate names are on a first-come, first-served basis.
+# This is the name used as the crate name.
 name = "rust-hello-world"
 version = "0.1.0"
 edition = "2021"
+# Metadata fields necessary for publishing to crates.io are:
+# license uses SPDX identifiers.
+# For custom licenses, use the license-file field to provide a file name to the license doc.
+# You can use the OR operator on the licenses.
+license = "MIT OR Apache-2.0"
+description = "Just another study-repo for learning Rust"
+
+# To publish the crate, use `cargo publish`.
+# To deprecate a crate version, use `cargo yank --vers <version>`.
+# A yank can be undone by providing the `--undo` option.
+# Yanked versions are still available for projects that specify it in their Cargo.lock file, so they don't break.
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -135,3 +148,7 @@ path = "src/iterators.rs"
 [[bin]]
 name = "iterator-performance"
 path = "src/iterator-performance.rs"
+
+[[bin]]
+name = "publishing"
+path = "src/publishing.rs"
