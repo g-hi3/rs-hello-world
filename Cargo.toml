@@ -164,3 +164,7 @@ path = "src/iterator-performance.rs"
 [[bin]]
 name = "publishing"
 path = "src/publishing.rs"
+
+[[bin]]
+name = "smart-pointers"
+path = "src/smart-pointers.rs"
