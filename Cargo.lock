@@ -76,7 +76,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "rust-hello-world"
+name = "rs-hello-world"
 version = "0.1.0"
 dependencies = [
  "rand",

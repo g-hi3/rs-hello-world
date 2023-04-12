@@ -1,7 +1,7 @@
 [package]
 # Crate names are on a first-come, first-served basis.
 # This is the name used as the crate name.
-name = "rust-hello-world"
+name = "rs-hello-world"
 version = "0.1.0"
 edition = "2021"
 # Metadata fields necessary for publishing to crates.io are:
@@ -148,10 +148,6 @@ path = "src/aggregator/main.rs"
 [[bin]]
 name = "lifetimes"
 path = "src/lifetimes.rs"
-
-[[bin]]
-name = "adder"
-path = "adder/src/main.rs"
 
 [[bin]]
 name = "closures"
