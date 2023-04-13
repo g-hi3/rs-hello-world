@@ -7,6 +7,7 @@
 // With the `Drop` trait, we can customize what happens when an instance goes out of scope.
 
 use std::ops::Deref;
+use std::rc::Rc;
 
 fn main() {
     // A box is used to store data on the heap instead of the stack.
@@ -55,6 +56,30 @@ fn main() {
     // The compiler calls the drop function a destructor.
     drop(d);
     println!("Dropped second CustomSmartPointer early.");
+
+    // Rc is an abbreviation for reference counting.
+    // `Rc<T>` keeps track of the number of references to a value.
+    // The Rust book names graphs as an example where values might have multiple owners.
+    // For multithreaded code, use `Arc<T>` instead.
+
+    let a = Rc::new(
+        List::RcCons(
+            5,
+            Rc::new(
+                List::RcCons(
+                    10,
+                    Rc::new(
+                        List::Nil)))));
+    println!("count after creating a = {}", Rc::strong_count(&a));
+    // Rust convention is to use `Rc::clone(&a)` instead of `a.clone()` in this case.
+    // This is because usually `a.clone()` creates a deep copy of the data.
+    let b = List::RcCons(3, Rc::clone(&a));
+    println!("count after creating b = {}", Rc::strong_count(&a));
+    {
+        let c = List::RcCons(4, Rc::clone(&a));
+        println!("count after creating c = {}", Rc::strong_count(&a));
+    }
+    println!("count after c goes out of scope = {}", Rc::strong_count(&a));
 }
 
 fn hello(name: &str) {
@@ -62,6 +87,7 @@ fn hello(name: &str) {
 }
 
 enum List {
+    RcCons(i32, Rc<List>),
     Cons(i32, Box<List>),
     Nil
 }
