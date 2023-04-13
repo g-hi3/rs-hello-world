@@ -39,6 +39,22 @@ fn main() {
     hello(&m);
     // If Rust didn't use deref coercion, this code would look like this (thank goodness):
     //     hello(&(*m)[..]);
+
+    let c = CustomSmartPointer {
+        data: String::from("my stuff")
+    };
+    let d = CustomSmartPointer {
+        data: String::from("other stuff")
+    };
+    println!("CustomSmartPointers created.");
+
+    // Rust doesn't allow you to call `drop()` manually.
+    // Instead we need to use the `std::mem::drop()` function.
+    // Usually, this isn't necessary.
+    // The Rust book uses the example of locks, that must be released early by dropping.
+    // The compiler calls the drop function a destructor.
+    drop(d);
+    println!("Dropped second CustomSmartPointer early.");
 }
 
 fn hello(name: &str) {
@@ -70,3 +86,14 @@ impl<T> Deref for MyBox<T> {
 // For mutable references, you can also implement the DerefMut trait.
 // It's possible to implement DerefMut to return an immutable reference.
 // It's not possible to implement Deref to return a mutable reference!
+
+#[derive(Debug)]
+struct CustomSmartPointer {
+    data: String
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data `{}`", self.data);
+    }
+}
