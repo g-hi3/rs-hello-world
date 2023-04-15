@@ -6,8 +6,9 @@
 // With the `Deref` trait, we can customize what happens when the dereference operator is used.
 // With the `Drop` trait, we can customize what happens when an instance goes out of scope.
 
+use std::cell::RefCell;
 use std::ops::Deref;
-use std::rc::Rc;
+use std::rc::{Rc, Weak};
 
 fn main() {
     // A box is used to store data on the heap instead of the stack.
@@ -93,6 +94,51 @@ fn main() {
     // That means, calling `borrow_mut()` twice will cause it to panic.
 
     // Using `Rc<RefCell<T>>` allows you to have multiple mutable ownership over a value.
+
+    // It's possible to create memory leaks when some data points to other data and that data points to the former.
+    // An `Rc<T>` also tracks the count of weak references (`Weak<T>`).
+    // Weak references are not being considered when cleaning up the data.
+
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![]),
+    });
+
+    println!(
+        "leaf strong = {}, weak = {}",
+        Rc::strong_count(&leaf),
+        Rc::weak_count(&leaf),
+    );
+
+    {
+        let branch = Rc::new(Node {
+            value: 5,
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![Rc::clone(&leaf)]),
+        });
+
+        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+
+        println!(
+            "branch strong = {}, weak = {}",
+            Rc::strong_count(&branch),
+            Rc::weak_count(&branch),
+        );
+
+        println!(
+            "leaf strong = {}, weak = {}",
+            Rc::strong_count(&leaf),
+            Rc::weak_count(&leaf),
+        );
+    }
+
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+    println!(
+        "leaf strong = {}, weak = {}",
+        Rc::strong_count(&leaf),
+        Rc::weak_count(&leaf),
+    );
 }
 
 fn hello(name: &str) {
@@ -175,6 +221,16 @@ where
                 .send("Warning: You've used up over 75% of your quota!");
         }
     }
+}
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    // This is a good example for using `Weak<T>`.
+    // A node should not own their parent, creating a reference cycle.
+    // Using `Weak<T>` allows this node to be cleaned up, if it isn't used anymore.
+    parent: RefCell<Weak<Node>>,
+    children: RefCell<Vec<Rc<Node>>>,
 }
 
 #[cfg(test)]
