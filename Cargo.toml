@@ -168,3 +168,7 @@ path = "src/publishing.rs"
 [[bin]]
 name = "smart-pointers"
 path = "src/smart-pointers.rs"
+
+[[bin]]
+name = "fearless-concurrency"
+path = "src/fearless-concurrency.rs"
