@@ -1,4 +1,5 @@
 use std::thread;
+use std::sync::mpsc;
 use std::time::Duration;
 
 fn main() {
@@ -30,4 +31,53 @@ fn main() {
     thread::spawn(move || {
         println!("Here's a vector {v:?}");
     });
+
+    // Rust takes inspiration from the Go language for communication between threads.
+    // It tells us, that threads should share data by communicating, instead of communicate by sharing data.
+    // Rust implements channels for this.
+    // A channel has an input stream and an output stream and is considered closed, when either stream is dropped.
+
+    // MPSC is short for multiple producers, single receiver.
+    let (transmitter, receiver) = mpsc::channel();
+    // To create another producer, we can call the `clone()` method.
+    let other_transmitter = transmitter.clone();
+
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
+        for val in vals {
+            // After sending, the value is moved to the receiving thread.
+            // This makes sure, that the value is not accessed when it might have already been modified or dropped.
+            transmitter.send(x).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("more"),
+            String::from("messages"),
+            String::from("for"),
+            String::from("you"),
+        ];
+        for val in vals {
+            other_transmitter.send(x).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    // `recv()` will block the thread until a value is received.
+    // When the thread exits, an error will be returned.
+    // `try_recv()` will immediately return the `Result<T, E>`, giving the value if one is available, or an error if not.
+    let received = receiver.recv().unwrap();
+    println!("Received {received}");
+
+    // The receiver also acts as an iterator, providing values received.
+    for received in receiver {
+        println!("Received {received}");
+    }
 }
