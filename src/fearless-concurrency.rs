@@ -1,5 +1,7 @@
 use std::thread;
+use std::sync::atomic::Arc;
 use std::sync::mpsc;
+use std::sync::Mutex;
 use std::time::Duration;
 
 fn main() {
@@ -80,4 +82,33 @@ fn main() {
     for received in receiver {
         println!("Received {received}");
     }
+
+    // Mutex is short for mutual exclusion.
+    // They are used to manage access to data between multiple threads.
+    // A thread needs to acquire the mutex lock in order to access the data.
+    // As soon as its done, it has to unlock the mutex, so other threads can access the data again.
+
+    // Arc is short for atomic reference count.
+    // Using atomic operations comes with some performance overhead that would be unnecessary in single-threaded contexts.
+    // Just as `RefCell<T>` can create memory leaks, it's possible for `Mutex<T>` to create deadlocks.
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 1..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            // `lock()` blocks the current thread, until the data is available.
+            // In this case, `lock()` returns a `LockResult<MutexGuard<i32>>`.
+            // The `MutexGuard<T>` is a smart pointer that releases the lock, when it is dropped.
+            let mut num = m.lock().unwrap();
+            *num = 6;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result = {:?}", *counter.lock().unwrap());
 }
