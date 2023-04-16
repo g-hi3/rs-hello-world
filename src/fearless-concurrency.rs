@@ -111,4 +111,11 @@ fn main() {
     }
 
     println!("Result = {:?}", *counter.lock().unwrap());
+
+    // Any value that doesn't implement the `Send` trait may not be transferred to another thread.
+    // A type that is entirely composed of `Send` values is automatically marked as `Send`.
+    // Types that implement `Sync` are considered to be safe to be accessed by mutliple threads.
+    // Similarly to `Send`, types that are composed of `Sync` are also `Sync`.
+    // Traits that have no methods to implement are called marker traits.
+    // Implementing `Send` or `Sync` manually involves the use of unsafe code.
 }
