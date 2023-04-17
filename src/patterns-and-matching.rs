@@ -61,6 +61,14 @@ fn main() {
     let point = (3, 5);
     print_coordinates(&point);
     print_coordinates(&(18, 22));
+
+    // Patterns can be refutable or irrefutable.
+    // Irrefutable patterns are patterns that can not fail to match.
+    // An example of this is `let x = 5;`.
+    // An example of a refutable pattern is `if let Some(x) = a_value`.
+    // Function parameters, `let` statements and `for` loops can only accept irrefutable patterns.
+    // There may be compiler error messages that mention refutable or irrefutable patterns.
+    // It is important to understand how these kinds of patterns are applied to work with these messages.
 }
 
 // Function parameters can also be patterns.
