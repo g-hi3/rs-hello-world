@@ -37,7 +37,8 @@ rand = "0.8.5"
 [workspace]
 members = [
     "adder",
-    "add_one"
+    "add_one",
+    "blog"
 ]
 
 # You can use `cargo install` to install binary Rust crates.
