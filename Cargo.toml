@@ -173,3 +173,7 @@ path = "src/smart-pointers.rs"
 [[bin]]
 name = "fearless-concurrency"
 path = "src/fearless-concurrency.rs"
+
+[[bin]]
+name = "patterns-and-matching"
+path = "src/patterns-and-matching.rs"
