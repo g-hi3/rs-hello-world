@@ -177,3 +177,7 @@ path = "src/fearless-concurrency.rs"
 [[bin]]
 name = "patterns-and-matching"
 path = "src/patterns-and-matching.rs"
+
+[[bin]]
+name = "unsafe-rust"
+path = "src/unsafe-rust.rs"
