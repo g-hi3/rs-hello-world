@@ -181,3 +181,7 @@ path = "src/patterns-and-matching.rs"
 [[bin]]
 name = "unsafe-rust"
 path = "src/unsafe-rust.rs"
+
+[[bin]]
+name = "advanced-traits"
+path = "src/advanced-traits.rs"
