@@ -10,4 +10,13 @@ fn main() {
     } else {
         println!("This is printed in the else case!");
     }
+
+    // Since Rust 1.68.0, we can use `let else`.
+    let Ok(5) = maybe() else {
+        panic!("This should be Ok!");
+    };
+}
+
+fn maybe() -> Result<i32, ()> {
+    Err(())
 }
