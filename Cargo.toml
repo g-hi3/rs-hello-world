@@ -189,3 +189,7 @@ path = "src/advanced-traits.rs"
 [[bin]]
 name = "advanced-types"
 path = "src/advanced-types.rs"
+
+[[bin]]
+name = "advanced-functions-and-closures"
+path = "src/advanced-functions-and-closures.rs"
