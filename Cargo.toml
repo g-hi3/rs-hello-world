@@ -38,7 +38,12 @@ rand = "0.8.5"
 members = [
     "adder",
     "add_one",
-    "blog"
+    "blog",
+    "hello_macro",
+    # For procedural define macros, the convention is to create a new crate and call it <crate-name>_derive.
+    "hello_macro/hello_macro_derive",
+    "procedural_macro",
+    "pancakes"
 ]
 
 # You can use `cargo install` to install binary Rust crates.
@@ -193,3 +198,7 @@ path = "src/advanced-types.rs"
 [[bin]]
 name = "advanced-functions-and-closures"
 path = "src/advanced-functions-and-closures.rs"
+
+[[bin]]
+name = "macros"
+path = "src/macros.rs"

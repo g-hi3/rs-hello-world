@@ -1,5 +1,5 @@
 use std::thread;
-use std::sync::atomic::Arc;
+use std::sync::Arc;
 use std::sync::mpsc;
 use std::sync::Mutex;
 use std::time::Duration;
@@ -54,7 +54,7 @@ fn main() {
         for val in vals {
             // After sending, the value is moved to the receiving thread.
             // This makes sure, that the value is not accessed when it might have already been modified or dropped.
-            transmitter.send(x).unwrap();
+            transmitter.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
@@ -67,7 +67,7 @@ fn main() {
             String::from("you"),
         ];
         for val in vals {
-            other_transmitter.send(x).unwrap();
+            other_transmitter.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
@@ -100,7 +100,7 @@ fn main() {
             // `lock()` blocks the current thread, until the data is available.
             // In this case, `lock()` returns a `LockResult<MutexGuard<i32>>`.
             // The `MutexGuard<T>` is a smart pointer that releases the lock, when it is dropped.
-            let mut num = m.lock().unwrap();
+            let mut num = counter.lock().unwrap();
             *num = 6;
         });
         handles.push(handle);
