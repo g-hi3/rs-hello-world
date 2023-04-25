@@ -203,3 +203,7 @@ path = "src/advanced-functions-and-closures.rs"
 [[bin]]
 name = "macros"
 path = "src/macros.rs"
+
+[[bin]]
+name = "appendix"
+path = "src/appendix.rs"
