@@ -11,11 +11,15 @@ use std::{
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
     let pool = ThreadPool::new(4);
-    for stream in listener.incoming() {
+    // A real web server would not finish after processing two requests.
+    // Instead, it shows how we could handle a graceful shutdown.
+    for stream in listener.incoming().take(2) {
         // A stream (in this case `TcpStream` represents an open connection between server and client.
         let stream = stream.unwrap();
         pool.execute(|| handle_connection(stream));
     }
+
+    println!("Shutting down.");
 }
 
 fn handle_connection(mut stream: TcpStream) {

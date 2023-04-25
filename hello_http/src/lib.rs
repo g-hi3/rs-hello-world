@@ -10,26 +10,30 @@ use std::{
 
 struct Worker {
     id: usize,
-    handle: JoinHandle<()>
+    thread: Option<JoinHandle<()>>
 }
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<Receiver<Job>>>) -> Self {
         // If the operating system can't create any more threads, `spawn` will panic.
         // To avoid panicking, you can use `Builder::spawn` instead.
-        let handle = thread::spawn(move || loop {
+        let thread = thread::spawn(move || loop {
             // A "chained" call like this immediately drops any temporary values in between, as soon as the `let` finishes.
             // The Rust book explains that using `while let Ok(job) = receiver.[...].recv()` wouldn't work, because `while let` does not drop the values until the end of the associated block.
-            let job = receiver
+            let message = receiver
                 // A mutex might be in a so-called "poisoned" state, if another thread that holds it panicked and didn't release it.
                 .lock()
                 .unwrap()
-                .recv()
-                .unwrap();
-            println!("Worker {id} got a job; executing.");
-            job();
+                .recv();
+            match message {
+                Ok(job) => job(),
+                Err(_) => {
+                    println!("Worker {id} disconnected; shutting down.");
+                    break;
+                }
+            };
         });
-        Worker { id, handle }
+        Worker { id, thread: Some(thread) }
     }
 }
 
@@ -38,7 +42,7 @@ type Job = Box<dyn FnOnce() + Send + 'static>;
 
 pub struct ThreadPool {
     workers: Vec<Worker>,
-    sender: Sender<Job>
+    sender: Option<Sender<Job>>
 }
 
 impl ThreadPool {
@@ -58,7 +62,7 @@ impl ThreadPool {
             workers.push(Worker::new(worker_id, Arc::clone(&receiver)))
         }
 
-        ThreadPool { workers, sender }
+        ThreadPool { workers, sender: Some(sender) }
     }
 
     pub fn build(size: usize) -> Result<ThreadPool, PoolCreationError> {
@@ -73,7 +77,23 @@ impl ThreadPool {
         where F: FnOnce() + Send + 'static {
         let job = Box::new(f);
         self.sender
+            .as_ref()
+            .unwrap()
             .send(job)
             .unwrap();
+    }
+}
+
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        drop(self.sender.take());
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+            if let Some(thread) = worker.thread.take() {
+                thread
+                    .join()
+                    .unwrap();
+            }
+        }
     }
 }
